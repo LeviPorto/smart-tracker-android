@@ -11,17 +11,15 @@ import com.levi.smarttracker.module.TrackerModule
 class App : Application() {
 
     var component: ApplicationComponent? = null
-        private set
 
     override fun onCreate() {
         super.onCreate()
-
         component = DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
-                .loginApiModule(LoginApiModule())
+                .loginApiModule(LoginApiModule(this))
                 .loginModule(LoginModule())
                 .trackerModule(TrackerModule())
-                .trackerApiModule(TrackerApiModule())
+                .trackerApiModule(TrackerApiModule(this))
                 .deviceApiModule(DeviceApiModule(this))
                 .build()
     }

@@ -10,8 +10,6 @@ import retrofit2.Call
  */
 class LoginRepository(private val loginApiService: LoginApiService) {
 
-    fun retrieveUser(username : String, password : String) : Call<TokenDTO> {
-        return loginApiService.login(JWTAuthenticationDTO(username, password))
-    }
+    fun retrieveUser(username : String, password : String) : Call<TokenDTO> = loginApiService.login(JWTAuthenticationDTO(username, password))
 
 }

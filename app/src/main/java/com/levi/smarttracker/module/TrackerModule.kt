@@ -29,7 +29,7 @@ class TrackerModule {
 
     @Singleton
     @Provides
-    fun provideRepo(trackerApiService: TrackerApiService): TrackerRepository {
+    fun provideTrackerRepository(trackerApiService: TrackerApiService): TrackerRepository {
         return TrackerRepository(trackerApiService)
     }
 

@@ -26,13 +26,12 @@ class LoginPresenter (private val model: LoginMVP.Model, private val context : C
             view!!.showErrorMessage()
         } else {
             model.loadUser(view!!.getUsername(), view!!.getPassword()).enqueue(object: Callback<TokenDTO> {
-                override fun onResponse(call: Call<TokenDTO>,
-                                        response: Response<TokenDTO>) {
+                override fun onResponse(call: Call<TokenDTO>, response: Response<TokenDTO>) {
                     PreferenceUtil.setStringPreference(context, "AUTH_TOKEN", response.body()!!.token)
                     PreferenceUtil.setIntegerPreference(context, "LOGGED_USER", response.body()!!.userId)
                     model.createDevice(DeviceDTO(getImei(context), response.body()!!.userId)).enqueue(object: Callback<Device> {
-                        override fun onResponse(call: Call<Device>,
-                                                response: Response<Device>) {
+
+                        override fun onResponse(call: Call<Device>, response: Response<Device>) {
                             view!!.showSuccessfullyLoginMessage()
                             val intent = Intent(context, TrackerActivity::class.java)
                             context.startActivity(intent)
@@ -50,6 +49,7 @@ class LoginPresenter (private val model: LoginMVP.Model, private val context : C
                                        t: Throwable?) {
                     view!!.showErrorMessage()
                 }
+
             })
 
         }

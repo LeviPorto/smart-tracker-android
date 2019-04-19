@@ -9,5 +9,4 @@ class DeviceRepository(private val deviceApiService: DeviceApiService) {
 
     fun create(deviceDTO: DeviceDTO) : Call<Device> = deviceApiService.create(deviceDTO)
 
-
 }

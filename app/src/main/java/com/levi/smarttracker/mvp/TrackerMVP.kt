@@ -17,8 +17,6 @@ class TrackerMVP {
 
     }
 
-    interface Model{
-
-    }
+    interface Model
 
 }

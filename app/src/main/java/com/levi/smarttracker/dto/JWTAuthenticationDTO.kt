@@ -6,5 +6,6 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by levip on 28/03/2019.
  */
-data class JWTAuthenticationDTO(@SerializedName("username") @Expose val username: String? = null,
-                                @SerializedName("password") @Expose val password: String? = null)
+data class JWTAuthenticationDTO(val username: String? = null,
+                                val password: String? = null
+)

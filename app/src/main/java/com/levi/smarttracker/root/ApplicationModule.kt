@@ -17,5 +17,4 @@ class ApplicationModule(private val application: Application) {
         return application
     }
 
-
 }

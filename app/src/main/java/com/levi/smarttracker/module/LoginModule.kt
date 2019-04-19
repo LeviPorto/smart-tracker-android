@@ -31,13 +31,13 @@ class LoginModule {
 
     @Singleton
     @Provides
-    fun provideRepo(loginApiService: LoginApiService): LoginRepository {
+    fun provideLoginRepository(loginApiService: LoginApiService): LoginRepository {
         return LoginRepository(loginApiService)
     }
 
     @Singleton
     @Provides
-    fun provideDeviceRepo(deviceApiService : DeviceApiService): DeviceRepository {
+    fun provideDeviceRepository(deviceApiService : DeviceApiService): DeviceRepository {
         return DeviceRepository(deviceApiService)
     }
 

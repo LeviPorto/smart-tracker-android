@@ -17,4 +17,9 @@ object PermissionUtil {
         }
     }
 
+    fun requestPermissions(context: Context, activity: Activity) {
+        requestPermission(context, activity, Manifest.permission.ACCESS_FINE_LOCATION)
+        requestPermission(context, activity, Manifest.permission.READ_PHONE_STATE)
+    }
+
 }

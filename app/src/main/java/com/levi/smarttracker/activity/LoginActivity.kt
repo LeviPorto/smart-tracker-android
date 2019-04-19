@@ -1,22 +1,17 @@
 package com.levi.smarttracker.activity
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.levi.smarttracker.R
+import com.levi.smarttracker.helper.ClickHelper
 import com.levi.smarttracker.mvp.LoginMVP
 import com.levi.smarttracker.root.App
-import com.levi.smarttracker.util.PermissionUtil.requestPermission
-import dagger.android.AndroidInjection
+import com.levi.smarttracker.util.PermissionUtil.requestPermissions
 import javax.inject.Inject
 
 /**
@@ -24,7 +19,7 @@ import javax.inject.Inject
  */
 
 class LoginActivity:
-        AppCompatActivity(), LoginMVP.View {
+        AppCompatActivity(), LoginMVP.View, ClickHelper {
 
     @JvmField @BindView(R.id.login_username) var usernameEdt: EditText? = null
     @JvmField @BindView(R.id.login_password) var passwordEdt: EditText? = null
@@ -38,13 +33,17 @@ class LoginActivity:
         setContentView(R.layout.activity_login)
         (application as App).component!!.inject(this)
         ButterKnife.bind(this)
-        requestPermission(applicationContext, this, Manifest.permission.ACCESS_FINE_LOCATION)
-        requestPermission(applicationContext, this, Manifest.permission.READ_PHONE_STATE)
 
+        requestPermissions(applicationContext, this)
+
+        setOnClick()
+
+    }
+
+     override fun setOnClick() {
         loginBtn!!.setOnClickListener {
             presenter!!.login()
         }
-
     }
 
     override fun onStart() {
