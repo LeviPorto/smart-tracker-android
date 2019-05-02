@@ -1,11 +1,12 @@
 package com.levi.smarttracker.root
 
 import android.app.Application
-import android.content.Context
 import com.levi.smarttracker.api.module.DeviceApiModule
 import com.levi.smarttracker.api.module.LoginApiModule
-import com.levi.smarttracker.api.module.TrackerApiModule
+import com.levi.smarttracker.api.module.CoordinateApiModule
+import com.levi.smarttracker.api.module.UserApiModule
 import com.levi.smarttracker.module.LoginModule
+import com.levi.smarttracker.module.SignUpModule
 import com.levi.smarttracker.module.TrackerModule
 
 class App : Application() {
@@ -19,8 +20,10 @@ class App : Application() {
                 .loginApiModule(LoginApiModule(this))
                 .loginModule(LoginModule())
                 .trackerModule(TrackerModule())
-                .trackerApiModule(TrackerApiModule(this))
+                .coordinateApiModule(CoordinateApiModule(this))
                 .deviceApiModule(DeviceApiModule(this))
+                .userApiModule(UserApiModule(this))
+                .signUpModule(SignUpModule())
                 .build()
     }
 

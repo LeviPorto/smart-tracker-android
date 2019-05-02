@@ -1,15 +1,11 @@
 package com.levi.smarttracker.module
 
 import android.content.Context
-import com.levi.smarttracker.api.service.LoginApiService
-import com.levi.smarttracker.api.service.TrackerApiService
-import com.levi.smarttracker.model.LoginModel
+import com.levi.smarttracker.api.service.CoordinateApiService
 import com.levi.smarttracker.model.TrackerModel
-import com.levi.smarttracker.mvp.LoginMVP
 import com.levi.smarttracker.mvp.TrackerMVP
 import com.levi.smarttracker.presenter.TrackerPresenter
-import com.levi.smarttracker.repository.LoginRepository
-import com.levi.smarttracker.repository.TrackerRepository
+import com.levi.smarttracker.repository.CoordinateRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -18,19 +14,19 @@ import javax.inject.Singleton
 class TrackerModule {
 
     @Provides
-    fun provideTrackerPresenter(context: Context): TrackerMVP.Presenter {
-        return TrackerPresenter(context)
+    fun providePresenter(model : TrackerMVP.Model, context: Context): TrackerMVP.Presenter {
+        return TrackerPresenter(model, context)
     }
 
     @Provides
-    fun provideTrackerModel(repository: TrackerRepository): TrackerMVP.Model {
+    fun provideModel(repository: CoordinateRepository): TrackerMVP.Model {
         return TrackerModel(repository)
     }
 
     @Singleton
     @Provides
-    fun provideTrackerRepository(trackerApiService: TrackerApiService): TrackerRepository {
-        return TrackerRepository(trackerApiService)
+    fun provideTrackerRepository(coordinateApiService: CoordinateApiService): CoordinateRepository {
+        return CoordinateRepository(coordinateApiService)
     }
 
 }

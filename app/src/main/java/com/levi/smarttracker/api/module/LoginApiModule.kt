@@ -5,7 +5,7 @@ package com.levi.smarttracker.api.module
  */
 import android.content.Context
 import com.levi.smarttracker.api.service.LoginApiService
-import com.levi.smarttracker.builder.OkHttpClientBuilder.buildOkHttpClient
+import com.levi.smarttracker.factory.OkHttpClientFactory.buildOkHttpClient
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

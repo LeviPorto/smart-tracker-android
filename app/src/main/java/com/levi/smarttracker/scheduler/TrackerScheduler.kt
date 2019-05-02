@@ -10,7 +10,13 @@ import android.os.Bundle
 import android.os.IBinder
 import android.support.v4.app.ActivityCompat
 import android.util.Log
-
+import com.levi.smarttracker.dto.CoordinateDTO
+import com.levi.smarttracker.mvp.TrackerMVP
+import com.levi.smarttracker.root.App
+import com.levi.smarttracker.util.PreferenceUtil.getBooleanPreference
+import com.levi.smarttracker.util.PreferenceUtil.getIntegerPreference
+import java.util.*
+import javax.inject.Inject
 
 
 /**
@@ -18,6 +24,8 @@ import android.util.Log
  */
 
 class TrackerScheduler : Service() {
+
+    @JvmField @Inject var presenter: TrackerMVP.Presenter? = null
 
     private var mLocationManager: LocationManager? = null
 
@@ -40,6 +48,12 @@ class TrackerScheduler : Service() {
         override fun onLocationChanged(location: Location) {
             Log.e(tag, "onLocationChanged: $location")
             mLastLocation.set(location)
+
+            if(getBooleanPreference(applicationContext, "SEND_COORDINATE", false)){
+                presenter!!.track(CoordinateDTO(location.latitude, location.longitude, Date(),
+                        getIntegerPreference(applicationContext, "LOGGED_USER", 0)))
+            }
+
         }
 
         override fun onProviderDisabled(provider: String) {
@@ -65,6 +79,8 @@ class TrackerScheduler : Service() {
     }
 
     override fun onCreate() {
+        (application as App).component!!.inject(this)
+
         initializeLocationManager()
 
         try {

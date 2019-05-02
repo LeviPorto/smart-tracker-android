@@ -1,11 +1,8 @@
 package com.levi.smarttracker.api.module
 
-/**
- * Created by levip on 28/03/2019.
- */
 import android.content.Context
-import com.levi.smarttracker.api.service.TrackerApiService
-import com.levi.smarttracker.builder.OkHttpClientBuilder.buildOkHttpClient
+import com.levi.smarttracker.api.service.UserApiService
+import com.levi.smarttracker.factory.OkHttpClientFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -13,13 +10,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-class TrackerApiModule(private val context: Context) {
+class UserApiModule(private val context: Context) {
 
     private val url = "http://192.168.100.108:8080"
 
     @Provides
     fun provideClient(): OkHttpClient {
-        return buildOkHttpClient(context)
+        return OkHttpClientFactory.buildOkHttpClient(context)
     }
 
     @Provides
@@ -32,8 +29,8 @@ class TrackerApiModule(private val context: Context) {
     }
 
     @Provides
-    fun provideApiService(): TrackerApiService {
-        return provideRetrofit(url, provideClient()).create<TrackerApiService>(TrackerApiService::class.java)
+    fun provideApiService(): UserApiService {
+        return provideRetrofit(url, provideClient()).create<UserApiService>(UserApiService::class.java)
     }
 
 }

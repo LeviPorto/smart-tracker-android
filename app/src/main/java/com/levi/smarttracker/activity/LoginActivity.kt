@@ -1,5 +1,6 @@
 package com.levi.smarttracker.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
@@ -23,7 +24,8 @@ class LoginActivity:
 
     @JvmField @BindView(R.id.login_username) var usernameEdt: EditText? = null
     @JvmField @BindView(R.id.login_password) var passwordEdt: EditText? = null
-    @JvmField @BindView(R.id.login_btn) var loginBtn: Button? = null
+    @JvmField @BindView(R.id.login_enter_btn) var loginBtn: Button? = null
+    @JvmField @BindView(R.id.login_sign_up_btn) var signUpBtn: Button? = null
 
     @JvmField @Inject var presenter: LoginMVP.Presenter? = null
 
@@ -44,6 +46,10 @@ class LoginActivity:
         loginBtn!!.setOnClickListener {
             presenter!!.login()
         }
+
+         signUpBtn!!.setOnClickListener{
+             changeToSignUpActivity()
+         }
     }
 
     override fun onStart() {
@@ -63,8 +69,16 @@ class LoginActivity:
         Toast.makeText(this, "Logged Successfully!", Toast.LENGTH_SHORT).show()
     }
 
-    override fun showErrorMessage() {
+    override fun showErrorLoginMessage() {
         Toast.makeText(this, "Username or Password are Incorrect", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun changeToTrackerActivity() {
+        applicationContext.startActivity(Intent(applicationContext, TrackerActivity::class.java))
+    }
+
+    override fun changeToSignUpActivity() {
+        applicationContext.startActivity(Intent(applicationContext, SignUpActivity::class.java))
     }
 
 }

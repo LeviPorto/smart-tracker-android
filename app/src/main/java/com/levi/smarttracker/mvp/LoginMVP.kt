@@ -16,7 +16,9 @@ interface LoginMVP {
         fun getUsername(): String
         fun getPassword(): String
         fun showSuccessfullyLoginMessage()
-        fun showErrorMessage()
+        fun showErrorLoginMessage()
+        fun changeToTrackerActivity()
+        fun changeToSignUpActivity()
 
     }
 

@@ -1,6 +1,10 @@
 package com.levi.smarttracker.mvp
 
-class TrackerMVP {
+import com.levi.smarttracker.dto.CoordinateDTO
+import com.levi.smarttracker.entity.Coordinate
+import retrofit2.Call
+
+interface TrackerMVP {
 
     interface View {
 
@@ -11,12 +15,17 @@ class TrackerMVP {
 
     interface Presenter {
 
+        fun track(coordinateDTO: CoordinateDTO)
         fun beginTracker()
         fun endTracker()
         fun setView(view: TrackerMVP.View)
 
     }
 
-    interface Model
+    interface Model {
+
+        fun sendCoordinate(coordinateDTO: CoordinateDTO) : Call<Coordinate>
+
+    }
 
 }

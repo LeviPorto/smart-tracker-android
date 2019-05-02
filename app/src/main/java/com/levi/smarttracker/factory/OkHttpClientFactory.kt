@@ -1,11 +1,11 @@
-package com.levi.smarttracker.builder
+package com.levi.smarttracker.factory
 
 import android.content.Context
 import com.levi.smarttracker.util.PreferenceUtil
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
-object OkHttpClientBuilder {
+object OkHttpClientFactory {
 
     fun buildOkHttpClient(context : Context): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))

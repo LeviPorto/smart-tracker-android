@@ -7,8 +7,6 @@ import com.levi.smarttracker.util.PreferenceUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.content.Intent
-import com.levi.smarttracker.activity.TrackerActivity
 import com.levi.smarttracker.dto.DeviceDTO
 import com.levi.smarttracker.entity.Device
 import com.levi.smarttracker.util.ImeiUtil.getImei
@@ -23,7 +21,7 @@ class LoginPresenter (private val model: LoginMVP.Model, private val context : C
 
     override fun login() {
         if (view!!.getUsername().trim() == "" || view!!.getPassword().trim() == "") {
-            view!!.showErrorMessage()
+            view!!.showErrorLoginMessage()
         } else {
             model.loadUser(view!!.getUsername(), view!!.getPassword()).enqueue(object: Callback<TokenDTO> {
                 override fun onResponse(call: Call<TokenDTO>, response: Response<TokenDTO>) {
@@ -33,13 +31,12 @@ class LoginPresenter (private val model: LoginMVP.Model, private val context : C
 
                         override fun onResponse(call: Call<Device>, response: Response<Device>) {
                             view!!.showSuccessfullyLoginMessage()
-                            val intent = Intent(context, TrackerActivity::class.java)
-                            context.startActivity(intent)
+                            view!!.changeToTrackerActivity()
                         }
 
                         override fun onFailure(call: Call<Device>,
                                                t: Throwable?) {
-                            view!!.showErrorMessage()
+                            view!!.showErrorLoginMessage()
                         }
 
                     })
@@ -47,7 +44,7 @@ class LoginPresenter (private val model: LoginMVP.Model, private val context : C
 
                 override fun onFailure(call: Call<TokenDTO>,
                                        t: Throwable?) {
-                    view!!.showErrorMessage()
+                    view!!.showErrorLoginMessage()
                 }
 
             })

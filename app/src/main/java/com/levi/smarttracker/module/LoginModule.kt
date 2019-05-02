@@ -20,12 +20,12 @@ import javax.inject.Singleton
 class LoginModule {
 
     @Provides
-    fun provideLoginPresenter(loginModel: LoginMVP.Model, context: Context): LoginMVP.Presenter {
+    fun providePresenter(loginModel: LoginMVP.Model, context: Context): LoginMVP.Presenter {
         return LoginPresenter(loginModel, context)
     }
 
     @Provides
-    fun provideLoginModel(repository: LoginRepository, deviceRepository: DeviceRepository): LoginMVP.Model {
+    fun provideModel(repository: LoginRepository, deviceRepository: DeviceRepository): LoginMVP.Model {
         return LoginModel(repository, deviceRepository)
     }
 
